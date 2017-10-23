@@ -12,7 +12,7 @@ export const initialState = []
 const todo = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TODO:
-      return  [
+      return [
         ...state,
         {
           id: action.payload.id,
