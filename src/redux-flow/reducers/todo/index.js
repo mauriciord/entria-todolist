@@ -1,6 +1,4 @@
 'use strict'
-// import { v4 } from 'node-uuid'
-// import moment from 'moment'
 
 import {
   ADD_TODO,
