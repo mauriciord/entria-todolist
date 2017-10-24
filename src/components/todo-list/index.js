@@ -7,6 +7,7 @@ import {
   toggleTodo,
   delTodo
 } from 'reducers/todo/action-creators'
+import { todosFilter } from 'utils/visibilityFilter'
 
 const styles = {
   container: css({
@@ -38,28 +39,36 @@ const styles = {
   })
 }
 
-const TodoList = ({ todos, handleToggleTodo, handleDelTodo }) => (
-  <div>
-    {todos.map((todo) => (
-      <div key={todo.id} {...styles.container}>
-        <div {...styles.textContainer} onClick={handleToggleTodo(todo.id)}>
-          <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-            {todo.text}
-          </span>
-        </div>
-        <div {...styles.btnContainer}>
-          <button {...styles.btnDel} onClick={handleDelTodo(todo.id)}>
-            X
-          </button>
-        </div>
-      </div>
-    ))}
-  </div>
-)
+const TodoList = ({ todos, filters, handleToggleTodo, handleDelTodo }) => {
+  const filteredTodos = todosFilter(
+    todos,
+    filters
+  )
 
-const mapStateToProps = ({ todos }) => {
+  return (
+    <div>
+      {filteredTodos.map((todo) => (
+        <div key={todo.id} {...styles.container}>
+          <div {...styles.textContainer} onClick={handleToggleTodo(todo.id)}>
+            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+              {todo.text}
+            </span>
+          </div>
+          <div {...styles.btnContainer}>
+            <button {...styles.btnDel} onClick={handleDelTodo(todo.id)}>
+              X
+          </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+const mapStateToProps = ({ todos, filters }) => {
   return {
-    todos
+    todos,
+    filters
   }
 }
 

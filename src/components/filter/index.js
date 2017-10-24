@@ -2,6 +2,15 @@
 
 import React from 'react'
 import { css } from 'glamor'
+import { connect } from 'react-redux'
+import {
+  filter
+} from 'reducers/filter/action-creators'
+import {
+  SHOW_ALL,
+  SHOW_COMPLETED,
+  SHOW_ACTIVE
+} from 'reducers/filter/actions'
 
 const styles = {
   container: css({
@@ -14,14 +23,23 @@ const styles = {
   })
 }
 
-const Filter = () => (
+const Filter = ({ handleFilter }) => (
   <div {...styles.container}>
     <div {...styles.optionsContainer}>
-      <span>All</span>
-      <span>Completed</span>
-      <span>Active</span>
+      <a onClick={handleFilter(SHOW_ALL)}>Show All</a>
+      <a onClick={handleFilter(SHOW_COMPLETED)}>Show Completed</a>
+      <a onClick={handleFilter(SHOW_ACTIVE)}>Show Active</a>
     </div>
   </div>
 )
 
-export default Filter
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleFilter: (filterOpt) => (e) => {
+      e.preventDefault()
+      dispatch(filter(filterOpt))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Filter)
