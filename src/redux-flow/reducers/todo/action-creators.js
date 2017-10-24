@@ -1,5 +1,6 @@
 'use strict'
 import { v4 } from 'uuid'
+import moment from 'moment'
 import {
   ADD_TODO,
   TOGGLE_TODO,
@@ -9,7 +10,7 @@ import {
 export const addTodo = (text) => {
   return {
     type: ADD_TODO,
-    payload: { id: v4(), text }
+    payload: { id: v4(), creation: moment().toDate(), text }
   }
 }
 

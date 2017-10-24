@@ -1,8 +1,7 @@
 'use strict'
 
 import {
-  SET_VISIBILITY_FILTER,
-  // SET_SORTER_FILTER
+  SET_VISIBILITY_FILTER
 } from './actions'
 
 export const filter = (filter) => {
@@ -11,10 +10,3 @@ export const filter = (filter) => {
     payload: { filter }
   }
 }
-
-// export const sort = (sorter) => {
-//   return {
-//     type: SET_SORTER_FILTER,
-//     payload: { sorter }
-//   }
-// }
