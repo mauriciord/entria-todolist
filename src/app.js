@@ -2,52 +2,30 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
+import { css } from 'glamor'
 import {
-  addTodo,
-  toggleTodo
+  delTodo
 } from 'reducers/todo/action-creators'
-import Todo from 'components/todo/Todo'
+import Form from 'components/form'
+import TodoList from 'components/todo-list'
+import Filter from 'components/filter'
 
-const App = ({ todos, handleAddTodo, handleToggleTodo, handleDelTodo }) => (
-  <div>
-    <form onSubmit={handleAddTodo}>
-      <input
-        type='text'
-        placeholder='Digite sua tarefa. Ex.: Comprar pão'
-        name='todo'
-      />
-    </form>
-    {console.log(todos)}
+const styles = {
+  container: css({
+    maxWidth: '800px',
+    margin: '0 auto',
+    border: '4px solid #ccc',
+    backgroundColor: '#eae6e6'
+  })
+}
+
+const App = () => (
+  <div {...styles.container}>
+    <Form />
     <div>Sort Filter</div>
-    {todos.map((todo) => (
-      <Todo btnDelClick={handleDelTodo} onClick={handleToggleTodo(todo.id)} todo={todo} />
-    ))}
-    <div>Done/Undone Filter</div>
+    <TodoList />
+    <Filter />
   </div>
 )
 
-const mapStateToProps = (state) => {
-  return {
-    todos: state.todos
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleAddTodo: (e) => {
-      e.preventDefault()
-      dispatch(addTodo(e.target.todo.value))
-      e.target.todo.value = ''
-    },
-    handleToggleTodo: (todoId) => (e) => {
-      e.preventDefault()
-      dispatch(toggleTodo(todoId))
-    },
-    handleDelTodo: (todoId) => (e) => {
-      e.preventDefault()
-      dispatch(toggleTodo(todoId))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App
