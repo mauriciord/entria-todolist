@@ -1,14 +1,11 @@
 'use strict'
 
 import React from 'react'
-import { connect } from 'react-redux'
 import { css } from 'glamor'
-import {
-  delTodo
-} from 'reducers/todo/action-creators'
 import Form from 'components/form'
 import TodoList from 'components/todo-list'
 import Filter from 'components/filter'
+import Sorter from 'components/sorter'
 
 const styles = {
   container: css({
@@ -22,7 +19,7 @@ const styles = {
 const App = () => (
   <div {...styles.container}>
     <Form />
-    <div>Sort Filter</div>
+    <Sorter />
     <TodoList />
     <Filter />
   </div>
