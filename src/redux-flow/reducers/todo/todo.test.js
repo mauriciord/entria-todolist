@@ -5,7 +5,8 @@ import deepFreeze from 'deep-freeze'
 import todo, { initialState } from './index'
 import {
   ADD_TODO,
-  TOGGLE_TODO
+  TOGGLE_TODO,
+  DEL_TODO
 } from './actions'
 
 it('should todo be a function', () => {
@@ -78,6 +79,46 @@ it('should toggle second todo', () => {
   const after = [
     { id: 0, text: 'Aloww', completed: false },
     { id: 1, text: 'Hey', completed: true }
+  ]
+
+  expect(todo(before, action)).to.be.deep.equal(after)
+})
+
+it('should delete the first todo', () => {
+  const before = deepFreeze([
+    { id: 3, text: 'Aloww', completed: false },
+    { id: 5, text: 'Hey', completed: false },
+    { id: 9, text: 'Hey', completed: false }
+  ])
+
+  const action = deepFreeze({
+    type: DEL_TODO,
+    payload: { id: 3 }
+  })
+
+  const after = [
+    { id: 5, text: 'Hey', completed: false },
+    { id: 9, text: 'Hey', completed: false }
+  ]
+
+  expect(todo(before, action)).to.be.deep.equal(after)
+})
+
+it('should delete the second todo', () => {
+  const before = deepFreeze([
+    { id: 0, text: 'Aloww', completed: false },
+    { id: 1, text: 'Hey', completed: false },
+    { id: 2, text: 'Hey John', completed: false }
+  ])
+
+  const action = deepFreeze({
+    type: DEL_TODO,
+    payload: { id: 1 }
+  })
+
+  const after = [
+    { id: 0, text: 'Aloww', completed: false },
+    { id: 2, text: 'Hey John', completed: false }
   ]
 
   expect(todo(before, action)).to.be.deep.equal(after)
