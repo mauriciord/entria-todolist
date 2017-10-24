@@ -8,6 +8,7 @@ import {
   delTodo
 } from 'reducers/todo/action-creators'
 import { todosFilter } from 'utils/visibilityFilter'
+import { sorterFilter } from 'utils/sorterFilter'
 
 const styles = {
   container: css({
@@ -39,9 +40,9 @@ const styles = {
   })
 }
 
-const TodoList = ({ todos, filters, handleToggleTodo, handleDelTodo }) => {
+const TodoList = ({ todos, filters, sorters, handleToggleTodo, handleDelTodo }) => {
   const filteredTodos = todosFilter(
-    todos,
+    sorterFilter(todos, sorters),
     filters
   )
 
@@ -65,10 +66,11 @@ const TodoList = ({ todos, filters, handleToggleTodo, handleDelTodo }) => {
   )
 }
 
-const mapStateToProps = ({ todos, filters }) => {
+const mapStateToProps = ({ todos, filters, sorters }) => {
   return {
     todos,
-    filters
+    filters,
+    sorters
   }
 }
 
