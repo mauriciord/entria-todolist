@@ -7,8 +7,20 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import App from './app'
 import reducer from 'reducers/index'
+import { loadState, saveState } from 'utils/localStorage'
+import throttle from 'lodash/throttle'
 
-const store = createStore(reducer)
+const persistedState = loadState()
+const store = createStore(
+  reducer,
+  persistedState
+)
+
+store.subscribe(throttle(() => {
+  saveState({
+    todos: store.getState().todos
+  })
+}, 1000))
 
 const renderApp = (NextApp) => {
   render(
