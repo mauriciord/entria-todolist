@@ -6,7 +6,7 @@ const Todo = ({ todo, onClick }) => (
     key={todo.id}
     style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
     >
-      {todo.text}
+    {todo.text}
   </div>
 )
 

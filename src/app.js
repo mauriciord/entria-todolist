@@ -8,7 +8,7 @@ import {
 } from 'reducers/todo/action-creators'
 import Todo from 'components/todo/Todo'
 
-const App = ({ todos, handleAddTodo, handleToggleTodo}) => (
+const App = ({ todos, handleAddTodo, handleToggleTodo, handleDelTodo }) => (
   <div>
     <form onSubmit={handleAddTodo}>
       <input
@@ -20,7 +20,7 @@ const App = ({ todos, handleAddTodo, handleToggleTodo}) => (
     {console.log(todos)}
     <div>Sort Filter</div>
     {todos.map((todo) => (
-      <Todo onClick={handleToggleTodo(todo.id)} todo={todo} />
+      <Todo btnDelClick={handleDelTodo} onClick={handleToggleTodo(todo.id)} todo={todo} />
     ))}
     <div>Done/Undone Filter</div>
   </div>
@@ -40,6 +40,10 @@ const mapDispatchToProps = (dispatch) => {
       e.target.todo.value = ''
     },
     handleToggleTodo: (todoId) => (e) => {
+      e.preventDefault()
+      dispatch(toggleTodo(todoId))
+    },
+    handleDelTodo: (todoId) => (e) => {
       e.preventDefault()
       dispatch(toggleTodo(todoId))
     }
