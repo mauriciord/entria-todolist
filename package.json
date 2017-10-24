@@ -2,6 +2,7 @@
   "scripts": {
     "start": "yarn dev",
     "dev": "webpack-dashboard -- node server.js",
+    "deploy": "npm run build && gh-pages -d dist",
     "test": "jest --coverage",
     "test:watch": "yarn test -- --watch",
     "lint": "standard --parser babel-eslint --verbose | snazzy",
@@ -18,6 +19,7 @@
       "^.+\\.css$": "<rootDir>/config/CSSStub.js"
     }
   },
+  "homepage": "http://mauriciord.github.io/entria-todolist",
   "standard": {
     "globals": [
       "it",
@@ -58,6 +60,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
+    "gh-pages": "^1.0.0",
     "glamor": "^2.20.40",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
