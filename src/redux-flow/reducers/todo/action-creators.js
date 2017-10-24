@@ -23,6 +23,6 @@ export const toggleTodo = (id) => {
 export const delTodo = (id) => {
   return {
     type: DEL_TODO,
-    payload: id
+    payload: { id }
   }
-};
+}
