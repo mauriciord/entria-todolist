@@ -1,4 +1,8 @@
-# Workflow ReactJS
+# Entria Todo List Challenge
+
+A todo list for Entria challenge. Demo: [see here](http://mauriciord.github.io/entria-todolist/)
+
+## Boilerplate: Workflow ReactJS
 
 ## What's inside it?
 
