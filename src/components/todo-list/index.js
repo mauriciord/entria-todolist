@@ -1,7 +1,7 @@
 'use strict'
 
 import React from 'react'
-import { css } from 'glamor'
+import styled from 'styled-components'
 import { connect } from 'react-redux'
 import {
   toggleTodo,
@@ -10,35 +10,53 @@ import {
 import { todosFilter } from 'utils/visibilityFilter'
 import { sorterFilter } from 'utils/sorterFilter'
 
-const styles = {
-  container: css({
-    border: '5px solid #ccc',
-    padding: 6,
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  }),
-  textContainer: css({
-    color: '#000',
-    textDecoration: 'none',
-    flex: 7,
-    textAlign: 'left'
-  }),
-  todoCompleted: css({
-    textDecoration: 'line-through'
-  }),
-  btnContainer: css({
-    flex: 1,
-    textAlign: 'right'
-  }),
-  btnDel: css({
-    borderRadius: 6,
-    border: '1px solid #e82222',
-    backgroundColor: '#f32929',
-    color: '#fff',
-    fontWeight: 'bold'
-  })
-}
+const Container = styled.div`
+  border-bottom: 1px solid #cdf6f7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1em;
+  &:first-child {
+    border-top: 1px solid #cdf6f7;
+  }
+  &:hover {
+    background: #ebf8f9;
+  }
+`
+
+const CheckContainer = styled.div`
+  flex: 1;
+  text-align: center;
+  font-size: 2em;
+`
+
+const TextContainer = styled.div`
+  color: #000;
+  text-decoration: none;
+  flex: 10;
+  text-align: left;
+  padding: 0.25em 0.75em 0.25em 1em;
+  border-left: 1px solid #cdf6f7;
+`
+
+const Text = styled.span`
+  font-size: 2em;
+  text-decoration: ${props => props.completed ? 'line-through' : 'none'};
+  color: ${props => props.completed ? '#CCC' : '#000'};
+`
+
+const BtnContainer = styled.div`
+  flex: 4;
+  text-align: right;
+`
+
+const BtnDelete = styled.button`
+  background: #f32929;
+  border: none;
+  color: #FFFFFF;
+  font-weight: bold;
+  border-radius: 4px;
+`
 
 const TodoList = ({ todos, filters, sorters, handleToggleTodo, handleDelTodo }) => {
   const filteredTodos = todosFilter(
@@ -49,18 +67,21 @@ const TodoList = ({ todos, filters, sorters, handleToggleTodo, handleDelTodo }) 
   return (
     <div>
       {filteredTodos.map((todo) => (
-        <div key={todo.id} {...styles.container}>
-          <div {...styles.textContainer} onClick={handleToggleTodo(todo.id)}>
-            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+        <Container key={todo.id}>
+          <CheckContainer onClick={handleToggleTodo(todo.id)}>
+            {!!todo.completed && <span>✔</span>}
+          </CheckContainer>
+          <TextContainer onClick={handleToggleTodo(todo.id)}>
+            <Text completed={todo.completed}>
               {todo.text}
-            </span>
-          </div>
-          <div {...styles.btnContainer}>
-            <button {...styles.btnDel} onClick={handleDelTodo(todo.id)}>
+            </Text>
+          </TextContainer>
+          <BtnContainer>
+            <BtnDelete onClick={handleDelTodo(todo.id)}>
               X
-          </button>
-          </div>
-        </div>
+            </BtnDelete>
+          </BtnContainer>
+        </Container>
       ))}
     </div>
   )

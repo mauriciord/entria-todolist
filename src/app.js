@@ -1,28 +1,29 @@
 'use strict'
 
 import React from 'react'
-import { css } from 'glamor'
+import styled from 'styled-components'
 import Form from 'components/form'
 import TodoList from 'components/todo-list'
 import Filter from 'components/filter'
 import Sorter from 'components/sorter'
+import './app.css'
 
-const styles = {
-  container: css({
-    maxWidth: '800px',
-    margin: '0 auto',
-    border: '4px solid #ccc',
-    backgroundColor: '#eae6e6'
-  })
-}
+const StyledApp = styled.div`
+  max-width: 800px;
+  background: #ffffff;
+  margin: 30px auto;
+  border-radius: 10px;
+  padding-top: .8em;
+  padding-bottom: .8em;
+`
 
 const App = () => (
-  <div {...styles.container}>
+  <StyledApp>
     <Form />
     <Sorter />
     <TodoList />
     <Filter />
-  </div>
+  </StyledApp>
 )
 
 export default App
